@@ -200,7 +200,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Contact Us</h3>
-              <p className="text-slate-600">Email: info@pprmgt.com</p>
+              <p className="text-slate-600">Email: info@pvpmgt.com</p>
               <p className="text-slate-600">Phone: (916) 916-9903</p>
               <p className="text-slate-600">Address: 1650 Page St, San Francisco, California(CA), 94117</p>
             </div>
