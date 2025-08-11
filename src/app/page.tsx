@@ -201,8 +201,8 @@ export default function LandingPage() {
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Contact Us</h3>
               <p className="text-slate-600">Email: info@pvpmgt.com</p>
-              <p className="text-slate-600">Phone: (916) 916-9903</p>
-              <p className="text-slate-600">Address: 1650 Page St, San Francisco, California(CA), 94117</p>
+              <p className="text-slate-600">Phone: (786) 902-7608</p>
+              <p className="text-slate-600">725 NE 166th St Miami, FL, 33162</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Links</h3>
@@ -216,7 +216,7 @@ export default function LandingPage() {
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Follow Us</h3>
               <div className="flex space-x-4">
                 <a href="#" className="text-slate-600 hover:text-slate-900">Facebook</a>
-                <a href="#" className="text-slate-600 hover:text-slate-900">Twitter</a>
+                <a href="#" className="text-slate-600 hover:text-slate-900">X</a>
                 <a href="#" className="text-slate-600 hover:text-slate-900">Instagram</a>
               </div>
             </div>
