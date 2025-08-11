@@ -202,7 +202,7 @@ export default function LandingPage() {
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Contact Us</h3>
               <p className="text-slate-600">Email: info@pvpmgt.com</p>
               <p className="text-slate-600">Phone: (786) 902-7608</p>
-              <p className="text-slate-600">725 NE 166th St Miami, FL, 33162</p>
+              <p className="text-slate-600">Address: 725 NE 166th St Miami, FL, 33162</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Links</h3>
