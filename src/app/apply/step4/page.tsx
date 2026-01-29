@@ -19,6 +19,44 @@ const validationSchema = Yup.object().shape({
   tourTime: Yup.string().required("Tour time is required")
 })
 
+const normalizeQuotes = (value: string) => value.replace(/[’‘]/g, "'")
+
+const buildDateFromMonthDay = (monthDayToken: string): Date | undefined => {
+  const cleanedToken = monthDayToken.replace(/(st|nd|rd|th)/gi, "")
+  const currentYear = new Date().getFullYear()
+  const candidate = new Date(`${cleanedToken} ${currentYear}`)
+  if (isNaN(candidate.getTime())) {
+    return undefined
+  }
+  candidate.setHours(0, 0, 0, 0)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  if (candidate < today) {
+    candidate.setFullYear(candidate.getFullYear() + 1)
+  }
+  return candidate
+}
+
+const deriveMinSelectableDate = (description: string): Date | undefined => {
+  const normalized = normalizeQuotes(description)
+  const beforeMatch = normalized.match(/expires before ([A-Za-z]+ \d{1,2}(?:st|nd|rd|th)?)/i)
+  if (beforeMatch) {
+    return buildDateFromMonthDay(beforeMatch[1])
+  }
+
+  const onMatch = normalized.match(/expires on ([A-Za-z]+ \d{1,2}(?:st|nd|rd|th)?)/i)
+  if (onMatch) {
+    const expiryDate = buildDateFromMonthDay(onMatch[1])
+    if (expiryDate) {
+      const nextAvailable = new Date(expiryDate)
+      nextAvailable.setDate(nextAvailable.getDate() + 1)
+      return nextAvailable
+    }
+  }
+
+  return undefined
+}
+
 export default function Step4() {
   const router = useRouter()
   const { formData, updateFormData } = useApplicationStore()
@@ -32,27 +70,21 @@ export default function Step4() {
         const settings = await getSettings()
         const description = settings.tourDateDescription || "Note: The current tenant's lease expires on July 28th. Please select a tour date after this date."
         setTourDateDescription(description)
-        // Optionally, parse a date from the description if you want to set minDate dynamically:
-        const dateMatch = description.match(/expires on ([A-Za-z]+ \d{1,2})/i)
-        if (dateMatch) {
-          try {
-            const expiryDate = new Date(`${dateMatch[1]}, ${new Date().getFullYear()}`)
-            if (!isNaN(expiryDate.getTime())) {
-              const nextDay = new Date(expiryDate)
-              nextDay.setDate(nextDay.getDate() + 1)
-              setMinDate(nextDay)
-            } else {
-              setDefaultMinDate()
-            }
-          } catch {
-            setDefaultMinDate()
-          }
+        const computedMinDate = deriveMinSelectableDate(description)
+        if (computedMinDate) {
+          setMinDate(computedMinDate)
         } else {
           setDefaultMinDate()
         }
       } catch (error) {
-        setTourDateDescription("Note: The current tenant's lease expires on July 28th. Please select a tour date after this date.")
-        setDefaultMinDate()
+        const fallbackDescription = "Note: The current tenant's lease expires on July 28th. Please select a tour date after this date."
+        setTourDateDescription(fallbackDescription)
+        const fallbackMinDate = deriveMinSelectableDate(fallbackDescription)
+        if (fallbackMinDate) {
+          setMinDate(fallbackMinDate)
+        } else {
+          setDefaultMinDate()
+        }
       }
     }
     loadSettings()
