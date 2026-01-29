@@ -98,6 +98,9 @@ export default function Confirmation() {
                       </p>
                     </li>
                   </ul>
+                  <p className="text-sm text-slate-600 mt-2">
+                    To keep your application on track, please email your most recent W2 and any valid government ID (front & back clear pictures) to rental@pvpmgt.com.
+                  </p>
                 </div>
 
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">

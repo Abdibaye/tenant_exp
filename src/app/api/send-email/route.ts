@@ -224,7 +224,7 @@ export async function POST(request: Request) {
           <div style="margin: 20px 0; padding: 20px; background-color: #f8fafc; border-radius: 8px;">
             <h3 style="color: #334155; margin-bottom: 15px;">Required Documents</h3>
             <p style="color: #334155; font-size: 16px; line-height: 1.6;">
-              For faster processing, please send the following documents to <a href="mailto:rental@pprmgt.com" style="color: #2563eb;">rental@pvpmgt.com</a>:
+              For faster processing, please send the following documents to <a href="mailto:rental@pvpmgt.com" style="color: #2563eb;">rental@pvpmgt.com</a>:
             </p>
             <ul style="color: #334155; font-size: 16px; line-height: 1.6; padding-left: 20px;">
               <li>Most recent W2</li>
